@@ -135,6 +135,11 @@ input[type=text].short{max-width:320px}
 .status.err{background:var(--coral-soft);color:var(--rust)}
 .done{display:grid;gap:10px;text-align:center;justify-items:center;padding:30px 10px}
 .done h2{font-family:var(--display);font-size:36px;color:var(--rust);margin:0;font-weight:400}
+/* booking confirmation */
+details.conf-only{margin-bottom:18px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+details.conf-only summary{cursor:pointer;padding:12px 14px;font-weight:600;color:var(--rust);font-size:15px}
+.conf-box{display:grid;gap:12px;padding:0 14px 16px}
+.conf-dl{display:grid;gap:10px;justify-items:center;margin-top:10px}
 </style>
 </head>
 <body>
@@ -147,6 +152,23 @@ input[type=text].short{max-width:320px}
     <div class="ornament" aria-hidden="true"><span></span></div>
     <p class="lede">Everyone staying at Soysambu needs to sign the conservancy's waiver, and this form lets you do it online. If you have a safari tent, you can pay for it at the end. You can fill it in for yourself and everyone coming with you, all in one go.</p>
   </header>
+
+  <details class="conf-only" id="conf-only">
+    <summary>Already sent your waiver? Download your booking confirmation</summary>
+    <div class="conf-box">
+      <p class="hint">For your Kenya ETA application. Find your name, add your passport number and download.</p>
+      <div class="find" style="padding:0">
+        <label class="lbl" for="cq">Your name</label>
+        <input type="text" id="cq" autocomplete="off" placeholder="Start typing your first or last name">
+        <ul class="results" id="cres" hidden></ul>
+      </div>
+      <div class="field">
+        <label class="lbl" for="cpass">Passport number</label>
+        <input type="text" id="cpass" class="short" autocomplete="off">
+      </div>
+      <div class="row"><button type="button" class="btn primary" id="cdl" aria-disabled="true">Download booking confirmation</button></div>
+    </div>
+  </details>
 
   <div class="find">
     <label class="lbl" for="q">Your name, as you wrote it when you RSVP'd</label>
@@ -229,6 +251,11 @@ input[type=text].short{max-width:320px}
     <div class="eyebrow">Staying at Soysambu</div>
     <h2 id="thanks-h">Thank you</h2>
     <p class="lede" id="thanks-p"></p>
+    <div class="conf-dl">
+      <span class="lbl">Booking confirmation for your Kenya ETA</span>
+      <div id="thanks-dl" class="row" style="justify-content:center"></div>
+      <p class="hint">A letter confirming your stay at Soysambu from 30 December 2026 to 2 January 2027, to upload as proof of accommodation.</p>
+    </div>
     <div class="ornament" aria-hidden="true"><span></span></div>
   </div>
 </div>
@@ -240,6 +267,7 @@ input[type=text].short{max-width:320px}
   </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
 /* ---------- Settings: change these if rates or details change ---------- */
 const CFG = {
@@ -336,11 +364,11 @@ function wireSearch(inp, list, onPick, excludeFn, manualLabel){
     if(!r.length) list.append(el("li","empty","No match. Try another spelling."));
     r.forEach(g=>{
       const li=el("li"), b=el("button",null,g.n); b.type="button";
-      b.onclick=()=>{ onPick(g.id); inp.value=""; list.hidden=true; };
+      b.onclick=()=>{ inp.value=""; list.hidden=true; onPick(g.id); };
       li.append(b); list.append(li);
     });
     const li=el("li"), m=el("button","manual",manualLabel); m.type="button";
-    m.onclick=()=>{ const v=inp.value.trim(); onPick(null, v); inp.value=""; list.hidden=true; };
+    m.onclick=()=>{ const v=inp.value.trim(); inp.value=""; list.hidden=true; onPick(null, v); };
     li.append(m); list.append(li);
   };
   inp.addEventListener("input", render);
@@ -636,12 +664,69 @@ async function submit(){
     const k=kesTotal();
     $("thanks-h").textContent="Thank you, "+first(party[0].name);
     $("thanks-p").textContent = (party.length>1 ? "Your waivers are" : "Your waiver is") + " with us" + (k ? ", along with your tent payment of "+amountText()+". We will check it has arrived and let you know if anything is missing." : ".") + " We look forward to seeing you at Soysambu.";
+    const dl=$("thanks-dl"); dl.innerHTML="";
+    party.forEach(p=>dl.append(dlButton(p.name.trim(), p.idno.trim())));
     window.scrollTo(0,0);
   } catch(e){
     sending=false; renderConfirm();
     const s=$("status"); s.hidden=false; s.className="status err";
     s.textContent="That did not go through. Check your internet connection and press the button again. If it keeps failing, email "+CFG.email+".";
   }
+}
+
+/* ---------- booking confirmation (PDF) ---------- */
+const STAY = {from:"30 December 2026", to:"2 January 2027", nights:"3", place:"Tented camp", address:["Soysambu Conservancy","Lake Elmenteita","Nakuru County","Kenya"]};
+function confirmationPdf(name, passport){
+  if(!window.jspdf) return false;
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({unit:"mm", format:"a4"});
+  const rust=[158,69,41], ink=[60,48,42], muted=[134,115,106], blue=[95,134,153], line=[227,207,182], cream=[250,243,233];
+  const L=28, R=182, W=R-L;
+  // frame
+  doc.setDrawColor(...rust); doc.setLineWidth(0.6); doc.rect(12,12,186,273);
+  doc.setLineWidth(0.2); doc.rect(14.5,14.5,181,268);
+  // ornament
+  const orn=(y)=>{ doc.setDrawColor(...blue); doc.setLineWidth(0.25); doc.line(80,y,101.5,y); doc.line(108.5,y,130,y);
+    doc.setFillColor(...blue); doc.lines([[2.2,-2.2],[2.2,2.2],[-2.2,2.2],[-2.2,-2.2]],102.8,y,[1,1],"F",true); };
+  let y=30; orn(y); y+=14;
+  doc.setFont("times","normal"); doc.setTextColor(...rust); doc.setFontSize(28);
+  doc.text("Booking confirmation", 105, y, {align:"center"}); y+=9;
+  doc.setFont("helvetica","normal"); doc.setFontSize(9.5); doc.setTextColor(...muted);
+  doc.text("Issued " + new Date().toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"}), 105, y, {align:"center"}); y+=12;
+  doc.setTextColor(...ink); doc.setFontSize(11);
+  doc.text(doc.splitTextToSize("This confirms that the guest named below has accommodation at Soysambu Conservancy in Kenya for the dates shown.", W), L, y, {lineHeightFactor:1.5}); y+=13;
+
+  const section=(title, rows)=>{
+    const lines=rows.map(([k,v])=>[k, Array.isArray(v)?v:doc.splitTextToSize(String(v), W-58)]);
+    const h=lines.reduce((s,[,v])=>s+5*v.length+3.4,0)+12;
+    doc.setFillColor(...cream); doc.setDrawColor(...line); doc.setLineWidth(0.3); doc.roundedRect(L,y,W,h,2.5,2.5,"FD");
+    doc.setFont("helvetica","bold"); doc.setFontSize(8); doc.setTextColor(...rust);
+    doc.text(title.toUpperCase(), L+7, y+8, {charSpace:1.2});
+    let yy=y+15; doc.setFontSize(10.5);
+    lines.forEach(([k,v],i)=>{
+      doc.setFont("helvetica","normal"); doc.setTextColor(...muted); doc.text(k, L+7, yy);
+      doc.setFont("helvetica","bold"); doc.setTextColor(...ink); doc.text(v, L+58, yy, {lineHeightFactor:1.35});
+      yy += 5*v.length + 3.4;
+    });
+    y += h + 6;
+  };
+  section("Guest", [["Name", name],["Passport number", passport || "-"]]);
+  section("Stay", [["Accommodation", STAY.place],["Address", STAY.address],["Arrival", STAY.from],["Departure", STAY.to],["Nights", STAY.nights]]);
+  section("Contact", [["Email", CFG.email],["Phone", "+254 746 642 171"]]);
+
+  y+=4; doc.setFont("helvetica","normal"); doc.setFontSize(11); doc.setTextColor(...ink);
+  doc.text("Please contact us if you need any further information.", L, y); y+=12;
+  doc.text("Kind regards,", L, y); y+=10;
+  doc.setFont("times","italic"); doc.setFontSize(16); doc.setTextColor(...rust);
+  doc.text("Sanne Bitter and Max Lovatelli", L, y);
+  orn(Math.max(y+14, 262));
+  doc.save("Booking confirmation - " + name + ".pdf");
+  return true;
+}
+function dlButton(name, passport){
+  const b=el("button","btn small","Download for "+name); b.type="button";
+  b.onclick=()=>{ if(!confirmationPdf(name, passport)) b.textContent="Download not available, please email "+CFG.email; };
+  return b;
 }
 
 /* ---------- state ---------- */
@@ -691,6 +776,12 @@ const startWith=(id,typed)=>{
   party=[makePerson(id,typed)]; paid=false; signerKey=""; update();
   $("s-group").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth", block:"start"});
 };
+let confName="";
+const confReady=()=>$("cdl").setAttribute("aria-disabled", String(!(confName.trim() && $("cpass").value.trim())));
+wireSearch($("cq"), $("cres"), (id,typed)=>{ confName = id===null ? (typed||"") : G[id].n; $("cq").value=confName; confReady(); }, ()=>[], "Use the name as I typed it");
+$("cq").addEventListener("input", ()=>{ confName=$("cq").value; confReady(); });
+$("cpass").addEventListener("input", confReady);
+$("cdl").onclick=()=>{ if(!confirmationPdf(confName.trim(), $("cpass").value.trim())) $("cdl").textContent="Download not available, please email "+CFG.email; };
 wireSearch($("q"), $("res"), startWith, ()=>[], "I'm not on the list, fill in my details myself");
 wireSearch($("q2"), $("res2"), (id,typed)=>{ party.push(makePerson(id,typed)); paid=false; update(); }, ()=>party.map(p=>p.id), "Add someone who is not on the list");
 $("pay-kes").onclick=()=>{ cur="KES"; paid=false; updateLight(); };
