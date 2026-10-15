@@ -1,0 +1,702 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<style>img{max-width:100%}[hidden]{display:none!important}body{margin:0}</style>
+<title>Soysambu waiver and tents</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Arima:wght@400;500&family=Source+Sans+3:wght@300;400;600&display=swap">
+<style>
+/* Layout: one centred paper column like the guest information card; name search, then four steps; running total pinned to the bottom.
+   Single light look on purpose, matching the printed wedding stationery. */
+:root{
+  color-scheme:light;
+  --bg:#f8efe2; --surface:#fffaf3; --sunk:#f2e5d2; --line:#e3cfb6;
+  --fg:#4b3b33; --muted:#86736a; --rust:#9e4529; --coral:#d9705a; --coral-soft:#f8e1d8;
+  --blue:#5f8699; --blue-soft:#e2ebee; --ok:#4f7a8c;
+  --display:"Marcellus", "Trajan Pro", Georgia, serif;
+  --label:"Arima", "Marcellus", Georgia, serif;
+  --body:"Source Sans 3", "Source Sans Pro", ui-sans-serif, system-ui, sans-serif;
+  --r:10px;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-weight:300;font-size:17px;line-height:1.55}
+b,strong{font-weight:600}
+.wrap{max-width:640px;margin:0 auto;padding-inline:16px;padding-block:36px 150px}
+header{display:grid;gap:10px;padding-block:8px 26px;text-align:center;justify-items:center}
+.eyebrow,.step-h h2,.lbl,.nights-h{font-family:var(--label);text-transform:uppercase;letter-spacing:.22em;color:var(--rust);font-weight:400}
+.eyebrow{font-size:12px}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(40px,10vw,58px);line-height:1.05;margin:0;color:var(--rust);text-wrap:balance}
+.lede{margin:4px 0 0;max-width:56ch}
+.ornament{display:flex;align-items:center;gap:8px;width:min(320px,70%);margin:6px auto 0}
+.ornament::before,.ornament::after{content:"";flex:1;height:1px;background:var(--blue);opacity:.7}
+.ornament span{width:6px;height:6px;background:var(--blue);transform:rotate(45deg)}
+section.step{padding-block:26px 6px;display:grid;gap:14px}
+section.step[aria-disabled="true"]{opacity:.4;pointer-events:none}
+.step-h{display:flex;align-items:baseline;gap:12px}
+.step-n{font-family:var(--display);font-size:22px;color:var(--coral);line-height:1}
+.step-h h2{font-size:14px;margin:0;line-height:1.3}
+.hint{color:var(--muted);font-size:15px;margin:0}
+.lbl{font-size:11px;letter-spacing:.18em}
+input[type=text],textarea{font:inherit;font-weight:400;color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:11px 13px;width:100%}
+textarea{min-height:80px;resize:vertical}
+input:focus-visible,textarea:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid var(--rust);outline-offset:2px}
+.find{display:grid;gap:8px;padding-bottom:10px}
+.results{list-style:none;margin:6px 0 0;padding:4px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);max-height:280px;overflow:auto}
+.results li button{all:unset;box-sizing:border-box;display:block;width:100%;padding:9px 10px;border-radius:7px;cursor:pointer;font-weight:400}
+.results li button:hover,.results li button:focus-visible{background:var(--sunk)}
+.results li button.manual{color:var(--rust);font-weight:600;font-size:15px}
+.results .empty{padding:9px 10px;color:var(--muted);font-size:15px}
+.person{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:18px}
+.person-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.person-name{font-family:var(--display);font-size:25px;line-height:1.15;color:var(--rust)}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.tag{font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;background:var(--sunk);color:var(--muted)}
+.tag.wp{background:var(--coral-soft);color:var(--rust)}
+.tag.chg{background:var(--blue-soft);color:var(--blue)}
+.field{display:grid;gap:8px}
+.field-h{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 10px;align-items:baseline}
+.was{font-size:13px;color:var(--muted)}
+.was b{color:var(--fg)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:15px;font-weight:400;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);border-radius:999px;padding:8px 15px;cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+.seg button::before{content:"";width:14px;height:14px;border-radius:50%;border:1.5px solid var(--muted);flex:none;box-sizing:border-box}
+.seg button:hover{border-color:var(--blue)}
+.seg button[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:600}
+.seg button[aria-pressed="true"]::before{border-color:#fff;background:radial-gradient(#fff 0 3px,transparent 3.5px)}
+.field.need .seg button:not([aria-pressed="true"]),.night-row.need .seg button{border-color:var(--coral)}
+.need-note{font-size:13px;color:var(--coral);font-weight:600}
+.nights{display:grid;gap:12px;background:var(--sunk);border-radius:12px;padding:14px}
+.nights-h{font-size:11px;letter-spacing:.18em}
+.night-row{display:grid;gap:8px;padding-top:12px;border-top:1px solid var(--line)}
+.night-row.first{border-top:none;padding-top:0}
+.night-day{font-weight:600}
+.free-note{font-size:13px;color:var(--rust);font-weight:600}
+.lines{display:grid;gap:4px;font-size:15px;border-top:1px dashed var(--line);padding-top:12px;font-variant-numeric:tabular-nums}
+.line{display:flex;justify-content:space-between;gap:12px}
+.line span:first-child{color:var(--muted);min-width:0}
+.line.sub{font-weight:600}
+.line.sub span:first-child{color:var(--fg)}
+.free{color:var(--blue);font-weight:600}
+.btn{font:inherit;font-weight:600;font-size:16px;border-radius:999px;padding:11px 20px;cursor:pointer;border:1.5px solid var(--line);background:var(--surface);color:var(--fg);text-decoration:none;display:inline-block;text-align:center}
+.btn.primary{background:var(--rust);border-color:var(--rust);color:#fff}
+.btn.small{font-size:14px;padding:6px 13px}
+.btn.link{border:none;background:none;color:var(--muted);text-decoration:underline;padding:4px;font-weight:400}
+.btn[aria-disabled="true"]{opacity:.35;pointer-events:none}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pay-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:460px){.pay-opts{grid-template-columns:1fr}}
+.pay{border:1.5px solid var(--line);border-radius:14px;padding:16px;background:var(--surface);cursor:pointer;text-align:left;font:inherit;color:var(--fg);display:grid;gap:6px}
+.pay .cur{font-family:var(--display);font-size:24px;line-height:1.1;color:var(--rust)}
+.pay .who{font-size:14px;color:var(--muted)}
+.pay[aria-pressed="true"]{border-color:var(--blue);background:var(--blue-soft)}
+.total{background:var(--rust);color:#fff7ee;border-radius:16px;padding:20px;display:grid;gap:10px}
+.total .eyebrow{color:inherit;opacity:.85}
+.total .big{font-family:var(--display);font-size:46px;line-height:1;font-variant-numeric:tabular-nums}
+.total .calc{font-size:14px;opacity:.85;font-variant-numeric:tabular-nums}
+.bank{display:grid;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px}
+.kv{display:grid;grid-template-columns:96px 1fr auto;gap:8px;align-items:center;font-size:15px;margin:0}
+.kv dt{color:var(--muted)}
+.kv dd{margin:0;font-weight:600;word-break:break-word;font-variant-numeric:tabular-nums}
+.copy{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--bg);color:var(--muted);border-radius:6px;padding:3px 9px;cursor:pointer}
+.ok{background:var(--blue-soft);color:var(--ok);border-radius:var(--r);padding:10px 12px;font-size:15px;font-weight:400}
+.confirm{display:grid;gap:12px;border:1.5px solid var(--coral);border-radius:14px;padding:16px;background:var(--surface)}
+.confirm h3{margin:0;font-family:var(--display);font-weight:400;font-size:22px;color:var(--rust)}
+.check{display:flex;gap:10px;align-items:flex-start;cursor:pointer;font-weight:600}
+.check input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--blue);flex:none}
+pre.summary{white-space:pre-wrap;font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--sunk);border-radius:var(--r);padding:12px;margin:0;max-height:240px;overflow:auto}
+details.sum summary{cursor:pointer;font-size:15px;color:var(--muted);font-weight:600}
+footer{text-align:center;padding-top:40px;display:grid;gap:14px}
+footer .sig{font-family:var(--display);font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--blue)}
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));display:flex;justify-content:center}
+.bar-in{max-width:640px;width:100%;display:flex;justify-content:space-between;align-items:center;gap:12px;font-variant-numeric:tabular-nums}
+.bar .t{font-family:var(--display);font-size:24px;line-height:1;color:var(--rust)}
+.bar .l{font-size:13px;color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){section.step{transition:opacity .2s}}
+/* waiver + signing */
+input[type=text].short{max-width:320px}
+.dates{font-size:15px;background:var(--blue-soft);color:var(--ok);border-radius:var(--r);padding:8px 12px}
+.dates b{color:var(--fg)}
+.waiver{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 18px 6px;max-height:360px;overflow:auto;font-size:15px}
+.waiver h3{font-family:var(--label);text-transform:uppercase;letter-spacing:.16em;font-size:12px;color:var(--rust);font-weight:400;margin:0 0 10px;line-height:1.5}
+.waiver p{margin:0 0 12px}
+.waiver .meta{font-size:13px;color:var(--muted)}
+.signer{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:12px}
+.pad-wrap{position:relative;border:1.5px dashed var(--line);border-radius:12px;background:#fff;touch-action:none}
+.pad-wrap.need{border-color:var(--coral)}
+.pad-wrap canvas{display:block;width:100%;height:160px;border-radius:12px;cursor:crosshair;touch-action:none}
+.pad-hint{position:absolute;left:14px;bottom:10px;font-size:13px;color:var(--muted);pointer-events:none}
+.pad-line{position:absolute;left:14px;right:14px;bottom:34px;height:1px;background:var(--line);pointer-events:none}
+.status{font-size:15px;border-radius:var(--r);padding:10px 12px}
+.status.err{background:var(--coral-soft);color:var(--rust)}
+.done{display:grid;gap:10px;text-align:center;justify-items:center;padding:30px 10px}
+.done h2{font-family:var(--display);font-size:36px;color:var(--rust);margin:0;font-weight:400}
+</style>
+</head>
+<body>
+
+
+<div class="wrap" id="app">
+  <header>
+    <div class="eyebrow">Staying at Soysambu</div>
+    <h1>Waiver &amp; tents</h1>
+    <div class="ornament" aria-hidden="true"><span></span></div>
+    <p class="lede">Everyone staying at Soysambu needs to sign the conservancy's waiver, and this form lets you do it online. If you have a safari tent, you can pay for it at the end. You can fill it in for yourself and everyone coming with you, all in one go.</p>
+  </header>
+
+  <div class="find">
+    <label class="lbl" for="q">Your name, as you wrote it when you RSVP'd</label>
+    <input type="text" id="q" autocomplete="off" placeholder="Start typing your first or last name">
+    <ul class="results" id="res" hidden></ul>
+  </div>
+
+  <section class="step" id="s-group" aria-disabled="true">
+    <div class="step-h"><span class="step-n"></span><h2>Who is in your group?</h2></div>
+    <p class="hint">Add your partner, family or tent mate. Everyone can sign and pay together on this form.</p>
+    <div class="row" id="group"></div>
+    <div class="row" id="suggest"></div>
+    <div class="find" style="padding:0">
+      <label class="lbl" for="q2">Add another guest</label>
+      <input type="text" id="q2" autocomplete="off" placeholder="Search the guest list">
+      <ul class="results" id="res2" hidden></ul>
+    </div>
+  </section>
+
+  <section class="step" id="s-details" aria-disabled="true">
+    <div class="step-h"><span class="step-n"></span><h2>Details for the waiver</h2></div>
+    <p class="hint">We have filled in what you told us when you RSVP'd. Please check it and confirm your dates and children, even if nothing has changed.</p>
+    <div id="people" style="display:grid;gap:12px"></div>
+  </section>
+
+  <section class="step" id="s-waiver" aria-disabled="true">
+    <div class="step-h"><span class="step-n"></span><h2>Read and sign the waiver</h2></div>
+    <p class="hint">This is Soysambu Conservancy's legal disclaimer. Everyone over 18 signs for themselves, and covers any children with them.</p>
+    <div class="waiver" tabindex="0" aria-label="Soysambu Conservancy legal disclaimer">
+      <h3>Loss or damage to property and personal injury or death: release, assumption of risk and waiver</h3>
+      <p class="meta">Activity: wedding of Sanne &amp; Max, camping. Location: Soysambu Conservancy.</p>
+      <p>I fully accept that in visiting Soysambu Conservancy, in carrying out research activities and/or field studies on Soysambu Conservancy and in carrying out any other activities (including camping, running, bicycling, walking, horse or camel riding, motorsport, gliding and ballooning) within Soysambu Conservancy, there exists an element of danger inherent in these activities.</p>
+      <p>I fully accept that there exist dangerous animals (including buffaloes, leopards, lions, hyenas, snakes, insects and others) within Soysambu Conservancy, and that these creatures are capable of causing me actual bodily harm and possibly death.</p>
+      <p>I acknowledge the risks inherent in my visit and I agree on behalf of myself, my personal representatives and any minors (under the age of 18 years) accompanying me to release the Conservancy, its employees, agents, affiliates and officers from and not to hold the Conservancy, its employees, agents, affiliates and officers liable for the consequences of any personal injury (fatal or otherwise), accidents, claims, losses and loss of or damage to personal property which might occur. I expressly assume any and all risks with respect to all activities during my visit and release the Conservancy, its employees, agents, affiliates and officers from any act of omission of any person (or their sub-contractors, agents or employees whether acting within the scope of their contractual obligations, agency or employments or not) who shall provide such activities or from any attack or injury by any animal or person.</p>
+      <p>I waive all rights to sue Soysambu Conservancy, its employees, agents, affiliates and officers on account of any injury, accident, claim, loss, liability or damage.</p>
+      <p>I understand that by signing this waiver and release I will not have any right to recover from Soysambu Conservancy, its employees, agents, affiliates and officers for any loss, damage or injury suffered by me or caused to my property.</p>
+      <p>If any portion of this release is unenforceable, such portion shall be struck out provided that the remaining portion shall remain in full force and effect.</p>
+      <p>I confirm that I have read and understood this document and accept that this disclaimer shall at all times be governed by Kenyan laws.</p>
+      <p class="meta">In case of emergency please contact 0711 235 039.</p>
+    </div>
+    <div id="signers" style="display:grid;gap:12px"></div>
+  </section>
+
+  <section class="step" id="s-tents" aria-disabled="true" hidden>
+    <div class="step-h"><span class="step-n"></span><h2>Tents</h2></div>
+    <div id="tents" style="display:grid;gap:12px"></div>
+    <div id="pay-wrap" style="display:grid;gap:12px" hidden>
+      <span class="lbl">How will you pay?</span>
+      <div class="pay-opts">
+        <button type="button" class="pay" id="pay-kes" aria-pressed="false">
+          <span class="cur">Kenya shillings</span>
+          <span class="who">M-Pesa to Max Lovatelli</span>
+        </button>
+        <button type="button" class="pay" id="pay-eur" aria-pressed="false">
+          <span class="cur">Euros</span>
+          <span class="who">Bank transfer to Sanne, plus 1% to cover the exchange to shillings</span>
+        </button>
+      </div>
+      <div id="final" style="display:grid;gap:12px"></div>
+    </div>
+  </section>
+
+  <section class="step" id="s-send" aria-disabled="true">
+    <div class="step-h"><span class="step-n"></span><h2>Send it to us</h2></div>
+    <div class="field">
+      <label class="lbl" for="note">Anything we should know, or any questions?</label>
+      <textarea id="note"></textarea>
+    </div>
+    <div class="confirm" id="confirm"></div>
+  </section>
+
+  <footer>
+    <div class="ornament" aria-hidden="true"><span></span></div>
+    <div class="sig">Soysambu Conservancy · Sanne &amp; Max · 31 December 2026</div>
+  </footer>
+</div>
+
+<div class="wrap" id="thanks" hidden>
+  <div class="done">
+    <div class="eyebrow">Staying at Soysambu</div>
+    <h2 id="thanks-h">Thank you</h2>
+    <p class="lede" id="thanks-p"></p>
+    <div class="ornament" aria-hidden="true"><span></span></div>
+  </div>
+</div>
+
+<div class="bar" id="bar" hidden>
+  <div class="bar-in">
+    <div><div class="l" id="bar-l">Tent payment</div><div class="t" id="bar-t"></div></div>
+    <div class="l" id="bar-r" style="text-align:right"></div>
+  </div>
+</div>
+
+<script>
+/* ---------- Settings: change these if rates or details change ---------- */
+const CFG = {
+  kesPerEur: 146,         // Revolut rate on 8 Oct 2026, rounded down
+  eurFee: 0.01,           // Revolut Standard: 1% over the monthly fair-usage limit or at weekends
+  tentWedding: 15000,     // safari tent, wedding night 31 Dec, per tent
+  tentExtra: 10000,       // safari tent, 30 Dec or 1 Jan, per tent per night
+  sheetUrl: "https://script.google.com/macros/s/AKfycbz-H2iifiw3Zyj7f_ZcwtzeeptdWVCDdgjuLQWqDU96VJKjbhrRI0kmPUVQsikzT9U1sA/exec",           // Google Apps Script web app URL (ends in /exec)
+  email: "sannebttr@gmail.com",
+  max:   { fullName: "Max Lovatelli", mpesa: "0746 642 171" },
+  sanne: { beneficiary: "Sanne Bitter", iban: "NL38 REVO 3031 7530 44", bic: "REVONL22", bank: "Revolut Bank UAB" }
+};
+const G = [{"id":0,"n":"Sam Taylor","r":"res","a":"own","p":1},{"id":1,"n":"Flick Taylor","r":"res","a":"own","p":0,"kc":2},{"id":2,"n":"Sophie Tyers","r":"res","a":"own","j":0,"p":3,"kc":0},{"id":3,"n":"Tom Makin","r":"res","a":"own","p":2,"kc":0},{"id":4,"n":"Sean Outram","r":"res","a":"own","j":0,"p":5,"kc":0},{"id":5,"n":"Charlotte Outram","r":"res","a":"own","p":4,"kc":2},{"id":6,"n":"Megan Budd","r":"res","a":"own","kc":0},{"id":7,"n":"Esmeralda Lovatelli","r":"res","a":"own","w":1,"p":8,"kc":0},{"id":8,"n":"Paolo Lovatelli","r":"res","a":"own","w":1,"p":7,"kc":0},{"id":9,"n":"Sebastiano Marchesi","r":"intl","a":"own","j":1},{"id":10,"n":"Uberto Marchesi","r":"intl","a":"own","j":1,"kc":0},{"id":11,"n":"Tommaso Pagotto","r":"intl","a":"basic","j":0,"tent":"B8","kc":0},{"id":12,"n":"Chiara Lovatelli","r":"res","a":"own","w":1,"p":13,"kc":0},{"id":13,"n":"Jesse Mathews","r":"res","a":"own","w":1,"p":12,"kc":0},{"id":14,"n":"Emanuele Lovatelli","r":"res","a":"own","w":1,"kc":0},{"id":15,"n":"Maria Lovatelli","r":"res","a":"own","w":1},{"id":16,"n":"Alice Murphy","r":"res","a":"safari","tent":"L22","m":-1,"kc":0},{"id":17,"n":"Katie Simpson","r":"res","a":"own","w":1,"p":18,"kc":0},{"id":18,"n":"Nile MacDonald","r":"res","a":"own","w":1,"p":17,"kc":0},{"id":19,"n":"Ross Duder","r":"res","a":"own","j":0,"p":20},{"id":20,"n":"Evie Bertram","r":"res","a":"own","j":0,"p":19},{"id":21,"n":"Nicola Francombe","r":"res","a":"own","p":22,"kc":0},{"id":22,"n":"Edward Cunningham","r":"res","a":"own","w":1,"p":21,"kc":0},{"id":23,"n":"Oscar Tundo","r":"res","a":"own","w":1,"kc":0},{"id":24,"n":"Angus Turner","r":"res","a":"own","j":0},{"id":25,"n":"Jamie Nicholas","r":"res","a":"own","kc":0},{"id":26,"n":"Spike Barton","r":"res","a":"own","p":27,"kc":0},{"id":27,"n":"Lily Hartley Barton","r":"res","a":"own","p":26,"kc":0},{"id":28,"n":"Giorgio Antonio Ninni Riva","r":"intl","a":"safari","j":1,"tent":"L9","m":39,"kc":0},{"id":29,"n":"Alessandro Ninni Riva","r":"intl","a":"safari","w":1,"j":1,"p":30,"tent":"L2","m":30,"kc":0},{"id":30,"n":"Lucila Funes Albanese","r":"intl","a":"safari","w":1,"j":1,"p":29,"tent":"L2","m":29,"kc":0},{"id":31,"n":"Antonietta Ninni Riva","r":"intl","a":"safari","j":1,"p":32,"tent":"L1","m":32,"kc":0},{"id":32,"n":"Ranieri Parodi","r":"intl","a":"safari","j":1,"p":31,"tent":"L1","m":31,"kc":0},{"id":33,"n":"Carlo Nuvolari-Duodo","r":"intl","a":"safari","j":1,"tent":"L5","m":36,"kc":0},{"id":34,"n":"Bianca Maria Nuvolari Duodo","r":"intl","a":"safari","j":1,"tent":"L4","m":35,"kc":0},{"id":35,"n":"Isabella Nuvolari","r":"intl","a":"safari","j":1,"tent":"L4","m":34,"kc":0},{"id":36,"n":"Orsola Nuvolari","r":"intl","a":"safari","j":1,"tent":"L5","m":33,"kc":0},{"id":37,"n":"Pietro de Lassotovitch","r":"intl","a":"basic","w":1,"j":1,"tent":"B2","kc":0},{"id":38,"n":"Edoardo Barbini","r":"intl","a":"basic","j":0,"tent":"B2","kc":0},{"id":39,"n":"Federico Cosulich","r":"intl","a":"safari","j":1,"tent":"L9","m":28},{"id":40,"n":"Maria Consolata Biachini","r":"intl","a":"safari","j":1,"p":41,"tent":"L6","m":41},{"id":41,"n":"Giacomo Ciani Bassetti","r":"intl","a":"safari","j":1,"p":40,"tent":"L6","m":40},{"id":42,"n":"Carlo Morassutti","r":"intl","a":"safari","j":1,"p":43,"tent":"L20","m":43},{"id":43,"n":"Tresi Morassutti-Vitale","r":"intl","a":"safari","j":1,"p":42,"tent":"L20","m":42},{"id":44,"n":"Henry Cholmondeley","r":"res","a":"own","w":1,"j":0,"p":45,"kc":0},{"id":45,"n":"Luca Scofield","r":"res","a":"own","w":1,"p":44,"kc":0},{"id":46,"n":"Tara Shepherd","r":"res","a":"own","w":1,"j":0,"kc":0},{"id":47,"n":"Matthew Armstrong","r":"res","a":"own","p":48,"kc":0},{"id":48,"n":"Alicia Esposito","r":"res","a":"own","p":47},{"id":49,"n":"Kiptoo Kulei","r":"res","a":"safari","j":0,"tent":"L8","m":-1,"kc":0},{"id":50,"n":"Ivan Jensen","r":"res","a":"own","j":0,"p":51,"kc":2,"kn":"Aaron Jensen - 12 years, Sophie Jensen- 10 years"},{"id":51,"n":"Cat Jensen","r":"res","a":"own","j":0,"p":50},{"id":52,"n":"Ferina Keshavjee","r":"res","a":"safari","j":0,"tent":"L3","m":-1,"kc":0},{"id":53,"n":"Sebastian Belcher","r":"res","a":"own"},{"id":54,"n":"Snapper Magor-Elliott","r":"res","a":"own","p":55,"kc":0},{"id":55,"n":"Anna Zerio","r":"res","a":"own","j":0,"p":54,"kc":0},{"id":56,"n":"Charlie Withey","r":"res","a":"own","j":1,"kc":0},{"id":57,"n":"Hugh Cholmondeley","r":"res","a":"own","w":1,"j":0},{"id":58,"n":"William Ballard","r":"res","a":"own","kc":0},{"id":59,"n":"Fraukje Bitter","r":"intl","a":"safari","w":1,"j":1,"p":60,"tent":"L10","m":60},{"id":60,"n":"Wilbert Bitter","r":"intl","a":"safari","w":1,"j":1,"p":59,"tent":"L10","m":59},{"id":61,"n":"Julia Bitter","r":"intl","a":"safari","w":1,"j":1,"tent":"L12","m":72,"kc":0},{"id":62,"n":"Thijm Bitter","r":"intl","a":"safari","w":1,"j":1,"p":63,"tent":"L17","m":63},{"id":63,"n":"Steff Bitter","r":"intl","a":"safari","w":1,"j":1,"p":62,"tent":"L17","m":62,"kc":0},{"id":64,"n":"Margot Visschers","r":"intl","a":"safari","j":1,"p":65,"tent":"L15","m":65,"kc":0},{"id":65,"n":"Thimo Zwiers","r":"intl","a":"safari","j":1,"p":64,"tent":"L15","m":64,"kc":0},{"id":66,"n":"Maxime Broekhuizen-Jansen","r":"intl","a":"safari","j":1,"p":67,"tent":"L16","m":67,"kc":0},{"id":67,"n":"Nick Jansen-Broekhuizen","r":"intl","a":"safari","j":1,"p":66,"tent":"L16","m":66},{"id":68,"n":"Pam Spreuwenberg","r":"intl","a":"safari","j":1,"p":69,"tent":"L13","m":69,"kc":0},{"id":69,"n":"Daan te Boekhorst","r":"intl","a":"safari","j":1,"p":68,"tent":"L13","m":68,"kc":0},{"id":70,"n":"Lilian Mooren","r":"intl","a":"safari","w":1,"j":1,"p":71,"tent":"L11","m":71,"kc":0},{"id":71,"n":"Frank Fransen","r":"intl","a":"safari","w":1,"p":70,"tent":"L11","m":70},{"id":72,"n":"Jolijn Buren","r":"intl","a":"safari","w":1,"j":1,"tent":"L12","m":61,"kc":0},{"id":73,"n":"Melis Orhan","r":"intl","a":"own","j":0,"p":74},{"id":74,"n":"Laurence Brouwer","r":"intl","a":"own","j":0,"p":73},{"id":75,"n":"Clous Holleman","r":"intl","a":"basic","w":1,"j":1,"tent":"B5"},{"id":76,"n":"Maurits Grievink","r":"intl","a":"basic","w":1,"j":1,"tent":"B5","kc":0},{"id":77,"n":"Claire Broeders","r":"intl","a":"safari","j":1,"p":78,"tent":"L14","m":78,"kc":0},{"id":78,"n":"Suzanne Broeders","r":"intl","a":"safari","j":1,"p":77,"tent":"L14","m":77,"kc":0},{"id":79,"n":"Sam Gueterbork","r":"res","a":"own","p":80},{"id":80,"n":"Emily Arcedeckne-Butler","r":"res","a":"own","j":1,"p":79,"kc":0},{"id":81,"n":"Guy Armstrong","r":"res","a":"own","p":82,"kc":0},{"id":82,"n":"Delaney Campbell","r":"res","a":"own","j":1,"p":81,"kc":0},{"id":83,"n":"Floor ter Haar","r":"res","a":"own","w":1,"j":1,"p":84},{"id":84,"n":"Eric Knot","r":"res","a":"own","w":1,"j":1,"p":83},{"id":85,"n":"Floor Wolfhagen","r":"res","a":"own","j":0,"p":86,"kc":0},{"id":86,"n":"Thomas Wever","r":"res","a":"own","j":0,"p":85,"kc":0},{"id":87,"n":"Derek Beeftink","r":"intl","a":"basic","j":1,"tent":"B7"},{"id":88,"n":"Dominique Langeslag","r":"intl","a":"basic","j":1,"tent":"B7"},{"id":89,"n":"Beezie Burden","r":"res","a":"own","p":90,"kc":2},{"id":90,"n":"Grant Burden","r":"res","a":"own","p":89},{"id":91,"n":"Stephanie Sluka","r":"intl","a":"safari","j":0,"tent":"L18","m":-1,"kc":0},{"id":92,"n":"Elsbeth Carrillo","r":"intl","a":"safari","w":1,"j":1,"tent":"L21","m":-1,"kc":0},{"id":93,"n":"Jacob Cheli","r":"res","a":"basic","tent":"B3","kc":0},{"id":94,"n":"Alistair White","r":"res","a":"own","p":95,"kc":0},{"id":95,"n":"Jenny Campbell","r":"res","a":"own","p":94,"kc":0},{"id":96,"n":"Oliver Francombe","r":"res","a":"own","p":97,"kc":0},{"id":97,"n":"Poppy Turner","r":"res","a":"own","p":96,"kc":0},{"id":98,"n":"Jamie Gaymer","r":"res","a":"safari","j":0,"p":99,"tent":"L23","m":99,"kc":2,"kn":"Chloe Gaymer 15, Sienna Gaymer 13"},{"id":99,"n":"Anye Juressen","r":"res","a":"safari","p":98,"tent":"L23","m":98},{"id":100,"n":"Giovanni Schönborn","r":"intl","a":"basic","tent":"B6","kc":0},{"id":101,"n":"Alexander Schönborn","r":"intl","a":"basic","j":1,"tent":"B6","kc":0},{"id":102,"n":"Georg Schoenborn","r":"intl","a":"basic","j":1,"tent":"B1","kc":0},{"id":103,"n":"Michael Schönborn","r":"intl","a":"basic","tent":"B1","kc":0},{"id":104,"n":"Damiana Schoenborn","r":"intl","a":"safari","j":0,"p":105,"tent":"L7","m":105,"kc":0},{"id":105,"n":"Paulo Schönborn","r":"intl","a":"safari","j":1,"p":104,"tent":"L7","m":104,"kc":0},{"id":106,"n":"Maddy Spinelli","r":"intl","a":"basic","j":1,"tent":"B4","kc":0},{"id":107,"n":"CJ Jones","r":"res","a":"safari","j":1,"p":108,"tent":"L19","m":108},{"id":108,"n":"John Logan","r":"res","a":"safari","j":1,"p":107,"tent":"L19","m":107},{"id":109,"n":"Boy Pelizzoli","r":"res","a":"own","kc":0},{"id":110,"n":"Callan Day","r":"res","a":"own","kc":0}];
+/* ----------------------------------------------------------------------- */
+
+const ACC = {safari:"Safari tent", basic:"Basic tent", own:"Own tent or own accommodation"};
+const RES = {res:"Kenya resident", intl:"International"};
+const YN = {yes:"Staying", no:"Not staying"};
+const fmtK = n => "KES " + Math.round(n).toLocaleString("en-GB");
+const fmtE = (n,dec=2) => "€" + n.toLocaleString("en-GB",{minimumFractionDigits:dec,maximumFractionDigits:dec});
+const $ = id => document.getElementById(id);
+const el = (tag, cls, text) => { const e=document.createElement(tag); if(cls) e.className=cls; if(text!==undefined) e.textContent=text; return e; };
+const first = n => (n||"").trim().split(" ")[0];
+
+let party = [];   // party[0] is the person filling in the form
+let cur = null;   // "KES" | "EUR"
+let paid = false;
+let sending = false;
+const subId = Math.random().toString(36).slice(2,8).toUpperCase();
+
+function makePerson(id, typed){
+  const base = {idno:"", kids:"", kidsAns:null, n30:null, n1:null, sign:null, agree:false, sig:null, paidElsewhere:false, other:""};
+  if(id===null) return Object.assign(base, {id:null, name:typed||"", w:false, r:null, a:null, share:null});
+  const g=G[id];
+  const share = g.a==="safari" ? (g.m>=0 ? "mate" : g.m===-2 ? "other" : "solo") : null;
+  return Object.assign(base, {id, name:g.n, w:!!g.w, r:g.r||null, a:g.a, share, kids: g.kn||""});
+}
+const mateName = p => p.id!==null && G[p.id].m>=0 ? G[G[p.id].m].n : null;
+const nightWas = p => p.id===null || G[p.id].j===undefined ? null : (G[p.id].j ? "yes" : "no");
+const kidsWas = p => { if(p.id===null) return null; const g=G[p.id]; if(g.kc===undefined && !g.kn) return null; if(!g.kc && !g.kn) return "no children"; return (g.kc? g.kc+" "+(g.kc===1?"child":"children") : "children") + (g.kn ? ": "+g.kn : ", no names given"); };
+const arrival = p => p.n30 ? "30 December 2026" : "31 December 2026";
+const departure = p => p.n1 ? "2 January 2027" : "1 January 2027";
+const kidsText = p => p.kidsAns==="yes" ? p.kids.trim() : "";
+const detailsDone = p => p.name.trim() && p.r && p.idno.trim() && p.n30!==null && p.n1!==null && (p.kidsAns==="no" || (p.kidsAns==="yes" && p.kids.trim()));
+const tentDone = p => p.a && (p.a!=="safari" || p.share!==null);
+const signDone = (p,i) => (i>0 && p.sign==="separate") || (p.agree && p.sig);
+const tentStepNeeded = () => party.some(p=>p.a==="safari" || p.id===null);
+
+function priceFor(p){
+  const items=[];
+  if(p.a==="safari" && !p.paidElsewhere && p.share){
+    const s = p.share==="solo" ? 1 : 0.5;
+    const how = s===1 ? " (whole tent)" : " (half a tent)";
+    items.push(["Safari tent, 31 Dec"+how, CFG.tentWedding*s]);
+    if(p.n30) items.push(p.w ? ["Safari tent, 30 Dec (wedding party)",0] : ["Safari tent, 30 Dec"+how, CFG.tentExtra*s]);
+    if(p.n1) items.push(["Safari tent, 1 Jan"+how, CFG.tentExtra*s]);
+  }
+  return {items, total: items.reduce((s,i)=>s+i[1],0)};
+}
+const kesTotal = () => party.reduce((s,p)=>s+priceFor(p).total,0);
+const eurTotal = k => Math.ceil(k/CFG.kesPerEur*(1+CFG.eurFee));
+const amountText = () => cur==="EUR" ? fmtE(eurTotal(kesTotal()),2) : fmtK(kesTotal());
+const payeeName = () => cur==="EUR" ? CFG.sanne.beneficiary : CFG.max.fullName;
+
+function changes(p){
+  if(p.id===null) return ["not on our list"];
+  const g=G[p.id], out=[];
+  if(p.r!==g.r) out.push(`residency (was ${RES[g.r]})`);
+  const w=nightWas(p), now = p.n1===null ? null : (p.n1?"yes":"no");
+  if(w && now && w!==now) out.push(`1 Jan (was ${YN[w].toLowerCase()})`);
+  const kw=kidsWas(p);
+  if(kw && p.kidsAns){ const had = !!(g.kc||g.kn); if(had!==(p.kidsAns==="yes") || (p.kidsAns==="yes" && g.kn && p.kids.trim()!==g.kn)) out.push(`children (was ${kw})`); }
+  return out;
+}
+function shareText(p){
+  if(p.a!=="safari") return "";
+  if(p.share==="solo") return "on their own";
+  if(p.share==="mate") return "sharing with " + mateName(p);
+  return "sharing with " + (p.other.trim() || "someone else");
+}
+
+/* ---------- search ---------- */
+const norm = s => s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
+function search(q, exclude){
+  q=norm(q.trim()); if(q.length<2) return null;
+  return G.filter(g=>!exclude.includes(g.id) && (norm(g.n).split(/[\s-]+/).some(w=>w.startsWith(q)) || norm(g.n).includes(q))).slice(0,8);
+}
+function wireSearch(inp, list, onPick, excludeFn, manualLabel){
+  const render=()=>{
+    const r=search(inp.value, excludeFn());
+    list.innerHTML="";
+    if(r===null){ list.hidden=true; return; }
+    list.hidden=false;
+    if(!r.length) list.append(el("li","empty","No match. Try another spelling."));
+    r.forEach(g=>{
+      const li=el("li"), b=el("button",null,g.n); b.type="button";
+      b.onclick=()=>{ onPick(g.id); inp.value=""; list.hidden=true; };
+      li.append(b); list.append(li);
+    });
+    const li=el("li"), m=el("button","manual",manualLabel); m.type="button";
+    m.onclick=()=>{ const v=inp.value.trim(); onPick(null, v); inp.value=""; list.hidden=true; };
+    li.append(m); list.append(li);
+  };
+  inp.addEventListener("input", render);
+}
+
+/* ---------- building blocks ---------- */
+function seg(options, value, onSet){
+  const d=el("div","seg");
+  Object.entries(options).forEach(([k,label])=>{
+    const b=el("button",null,label); b.type="button";
+    b.setAttribute("aria-pressed", String(value===k));
+    b.onclick=()=>onSet(k); d.append(b);
+  });
+  return d;
+}
+function field(label, was, need, child){
+  const f=el("div","field"+(need?" need":""));
+  const h=el("div","field-h"); h.append(el("span","lbl",label));
+  if(was){ const w=el("span","was"); w.append("Your RSVP: "); w.append(el("b",null,was)); h.append(w); }
+  f.append(h, child);
+  if(need) f.append(el("span","need-note","Please choose one"));
+  return f;
+}
+function textInput(id, value, placeholder, onInput, cls){
+  const inp=el("input",cls); inp.type="text"; inp.id=id; inp.value=value; inp.placeholder=placeholder||"";
+  inp.oninput=()=>{ onInput(inp.value); updateLight(); };
+  return inp;
+}
+function labelled(id, label, inp, hint){
+  const f=el("div","field"), l=el("label","lbl",label); l.htmlFor=id;
+  f.append(l, inp); if(hint) f.append(el("span","hint",hint));
+  return f;
+}
+
+/* ---------- step: group ---------- */
+function renderGroup(){
+  const g=$("group"); g.innerHTML="";
+  party.forEach((p,i)=>{
+    const chip=el("span","tag"+(i===0?" wp":"")); chip.style.fontSize="14px"; chip.style.padding="5px 12px";
+    chip.textContent=(p.name.trim()||"New guest")+(i===0?" (you)":"");
+    g.append(chip);
+    if(i>0){ const rm=el("button","btn link","Remove"); rm.type="button"; rm.style.fontSize="13px"; rm.onclick=()=>{ party.splice(i,1); paid=false; update(); }; g.append(rm); }
+  });
+  const s=$("suggest"); s.innerHTML="";
+  const ids=party.map(p=>p.id), sugg=new Set();
+  party.forEach(p=>{ if(p.id===null) return; const x=G[p.id];
+    [x.p, x.m].forEach(v=>{ if(v!==undefined && v>=0 && !ids.includes(v)) sugg.add(v); }); });
+  sugg.forEach(id=>{ const b=el("button","btn small","+ Add "+G[id].n); b.type="button"; b.onclick=()=>{ party.push(makePerson(id)); paid=false; update(); }; s.append(b); });
+}
+
+/* ---------- step: waiver details ---------- */
+function renderPeople(){
+  const box=$("people"); box.innerHTML="";
+  party.forEach((p,i)=>{
+    const card=el("article","person");
+    const top=el("div","person-top"), left=el("div");
+    if(p.id===null){
+      left.style.display="grid"; left.style.gap="6px"; left.style.flex="1";
+      left.append(labelled("manual-"+i, "Full name (not on our list)", textInput("manual-"+i, p.name, "Full name", v=>p.name=v)));
+    } else left.append(el("div","person-name",p.name));
+    const tags=el("div","tags");
+    tags.append(el("span","tag", i===0 ? "You" : "In your group"));
+    if(p.w) tags.append(el("span","tag wp","Wedding party"));
+    if(p.id!==null && changes(p).length) tags.append(el("span","tag chg","Updated"));
+    left.append(tags); top.append(left); card.append(top);
+
+    const g = p.id===null ? null : G[p.id];
+    card.append(field("Residency", g&&g.r ? RES[g.r] : null, !p.r, seg(RES, p.r, v=>{p.r=v; update();})));
+    card.append(labelled("idno-"+i, "ID or passport number", textInput("idno-"+i, p.idno, "", v=>p.idno=v, "short")));
+
+    const nights=el("div","nights");
+    nights.append(el("div","nights-h","Arrival and departure"));
+    nights.append(el("span","hint","Everyone stays the wedding night of 31 December. Are you also staying these nights?"));
+    [["n30","Night of 30 December"],["n1","Night of 1 January"]].forEach(([key,label],k)=>{
+      const row=el("div","night-row"+(k===0?" first":"")+(p[key]===null?" need":""));
+      const h=el("div","field-h"); h.append(el("span","night-day",label));
+      const w=el("span","was"); w.append("Your RSVP: ");
+      const was=nightWas(p);
+      w.append(el("b",null, key==="n30" ? "not asked" : (was ? YN[was].toLowerCase() : "no answer")));
+      h.append(w); row.append(h);
+      row.append(seg(YN, p[key]===null ? null : (p[key]?"yes":"no"), v=>{ p[key]= v==="yes"; paid=false; update(); }));
+      nights.append(row);
+    });
+    if(p.n30!==null && p.n1!==null){
+      const d=el("div","dates"); d.append("Arriving ", el("b",null,arrival(p)), ", leaving ", el("b",null,departure(p)));
+      nights.append(d);
+    }
+    card.append(nights);
+
+    const kw=kidsWas(p);
+    const kf=field("Children under 18 coming with you", kw || (g ? "no answer" : null), !p.kidsAns,
+      seg({no:"No children", yes:"Yes, bringing children"}, p.kidsAns, v=>{ p.kidsAns=v; update(); }));
+    if(p.kidsAns==="yes"){
+      const inp=textInput("kids-"+i, p.kids, "Names and ages, for example Aaron 12, Sophie 10", v=>p.kids=v);
+      kf.append(inp);
+      if(!p.kids.trim()) kf.append(el("span","need-note","Please add their names and ages"));
+    }
+    card.append(kf);
+    box.append(card);
+  });
+}
+
+/* ---------- step: tents ---------- */
+function renderTents(){
+  const box=$("tents"); box.innerHTML="";
+  party.forEach((p,i)=>{
+    const card=el("article","person");
+    card.append(el("div","person-name", p.name.trim() || "Guest "+(i+1)));
+    if(p.id!==null){
+      const what = p.a==="safari" ? (p.share==="solo" ? "Safari tent, just you" : "Safari tent, shared with " + (mateName(p) || "one other guest")) : ACC[p.a];
+      const fee = p.a==="safari" ? (p.share==="solo" ? `${fmtK(CFG.tentWedding)} for the wedding night and ${fmtK(CFG.tentExtra)} for each extra night.` : `${fmtK(CFG.tentWedding)} per tent for the wedding night and ${fmtK(CFG.tentExtra)} for each extra night, split between the two of you.`) : "Nothing to pay.";
+      const f=el("div","field"); f.append(el("span","lbl","Your tent"), el("div","night-day",what));
+      f.append(el("span","hint", fee + " This comes from our camp plan. If something looks wrong, tell us in the note at the end."));
+      card.append(f);
+    } else {
+      const opts={safari:"Safari tent (only if we have given you one)", basic:"Basic tent", own:ACC.own};
+      card.append(field("Where you sleep", null, !p.a, seg(opts, p.a, v=>{p.a=v; p.share = v==="safari" ? p.share : null; update();})));
+      if(p.a==="safari"){
+        const f=field("Sharing the safari tent?", null, !p.share, seg({other:"With someone", solo:"On my own"}, p.share, v=>{p.share=v; update();}));
+        f.insertBefore(el("span","hint","A safari tent is "+fmtK(CFG.tentWedding)+" per tent. Sharing splits it in two."), f.children[1]);
+        if(p.share==="other") f.append(textInput("other-"+i, p.other, "Who are you sharing with?", v=>p.other=v));
+        card.append(f);
+      }
+    }
+    if(p.a==="safari"){
+      const lab=el("label","check"), cb=el("input"); cb.type="checkbox"; cb.id="pe-"+i; cb.checked=p.paidElsewhere;
+      cb.onchange=()=>{ p.paidElsewhere=cb.checked; paid=false; update(); };
+      lab.style.fontWeight="400"; lab.append(cb, el("span",null,"Someone else has already paid for this tent share"));
+      card.append(lab);
+      if(tentDone(p)){
+        const pr=priceFor(p);
+        if(!pr.items.length) card.append(el("div","ok","Tent already paid for."));
+        else {
+          const lines=el("div","lines");
+          pr.items.forEach(([l,v])=>{ const r=el("div","line"); r.append(el("span",null,l), el("span", v?null:"free", v?fmtK(v):"Free")); lines.append(r); });
+          const r=el("div","line sub"); r.append(el("span",null,"Tent for "+first(p.name)), el("span",null,fmtK(pr.total))); lines.append(r);
+          card.append(lines);
+        }
+      }
+    }
+    box.append(card);
+  });
+}
+
+/* ---------- step: waiver ---------- */
+function signaturePad(p, i){
+  const wrap=el("div","pad-wrap"+(p.sig?"":" need"));
+  const c=el("canvas"); c.setAttribute("aria-label","Signature for "+(p.name||"guest"));
+  wrap.append(c, el("div","pad-line"), el("span","pad-hint", "Sign here with your finger or mouse"));
+  let ctx, drawing=false, last=null;
+  const setup=()=>{
+    const r=c.getBoundingClientRect(), dpr=Math.min(window.devicePixelRatio||1,2);
+    if(!r.width) return;
+    c.width=Math.round(r.width*dpr); c.height=Math.round(r.height*dpr);
+    ctx=c.getContext("2d"); ctx.scale(dpr,dpr);
+    ctx.lineWidth=2.2; ctx.lineCap="round"; ctx.lineJoin="round"; ctx.strokeStyle="#2b2320";
+    if(p.sig){ const img=new Image(); img.onload=()=>ctx.drawImage(img,0,0,r.width,r.height); img.src=p.sig; }
+  };
+  requestAnimationFrame(setup);
+  const pos=e=>{ const r=c.getBoundingClientRect(); return [e.clientX-r.left, e.clientY-r.top]; };
+  c.addEventListener("pointerdown",e=>{ if(!ctx) setup(); drawing=true; last=pos(e); c.setPointerCapture(e.pointerId); ctx.beginPath(); ctx.arc(last[0],last[1],1.1,0,7); ctx.fillStyle="#2b2320"; ctx.fill(); e.preventDefault(); });
+  c.addEventListener("pointermove",e=>{ if(!drawing) return; const pt=pos(e); ctx.beginPath(); ctx.moveTo(last[0],last[1]); ctx.lineTo(pt[0],pt[1]); ctx.stroke(); last=pt; e.preventDefault(); });
+  const end=()=>{ if(!drawing) return; drawing=false; p.sig=c.toDataURL("image/png"); wrap.classList.remove("need"); updateLight(); };
+  c.addEventListener("pointerup",end); c.addEventListener("pointercancel",end); c.addEventListener("pointerleave",end);
+  const clear=el("button","btn small","Clear signature"); clear.type="button";
+  clear.onclick=()=>{ p.sig=null; if(ctx) ctx.clearRect(0,0,c.width,c.height); wrap.classList.add("need"); updateLight(); };
+  return [wrap, clear];
+}
+
+function renderSigners(){
+  const box=$("signers"); box.innerHTML="";
+  party.forEach((p,i)=>{
+    const card=el("div","signer");
+    card.append(el("div","person-name", p.name.trim() || "Guest "+(i+1)));
+    if(i>0){
+      card.append(seg({here:"Signs here now", separate:"Will fill in their own form"}, p.sign==="separate" ? "separate" : "here", v=>{ p.sign= v==="separate" ? "separate" : null; renderSigners(); updateLight(); }));
+    }
+    if(i===0 || p.sign!=="separate"){
+      const lab=el("label","check"), cb=el("input"); cb.type="checkbox"; cb.id="agree-"+i; cb.checked=p.agree;
+      cb.onchange=()=>{ p.agree=cb.checked; updateLight(); };
+      lab.append(cb, el("span",null,"I have read and understood the waiver above and accept that it is governed by Kenyan law."));
+      card.append(lab);
+      const [pad, clear]=signaturePad(p,i);
+      card.append(pad);
+      const r=el("div","row"); r.append(clear, el("span","hint","Signed "+new Date().toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"}))); card.append(r);
+    } else {
+      card.append(el("p","hint","Ask "+(first(p.name)||"them")+" to open this form, find their name and sign. If you are paying for their tent, they can tick that someone else has already paid."));
+    }
+    box.append(card);
+  });
+}
+
+/* ---------- step: payment ---------- */
+function copy(text, btn){
+  const done=()=>{ const o=btn.textContent; btn.textContent="Copied"; setTimeout(()=>btn.textContent=o,1500); };
+  const fallback=()=>{ const t=el("textarea"); t.value=text; document.body.append(t); t.select(); try{document.execCommand("copy"); done();}catch(e){} t.remove(); };
+  try{ navigator.clipboard.writeText(text).then(done, fallback); }catch(e){ fallback(); }
+}
+function kvRow(dl, label, value, copyVal){
+  dl.append(el("dt",null,label), el("dd",null,value));
+  const c=el("span");
+  if(copyVal!==undefined){ const b=el("button","copy","Copy"); b.type="button"; b.onclick=()=>copy(copyVal,b); c.append(b); }
+  dl.append(c);
+}
+const reference = () => { const n=party.map(p=>p.name.trim()||"guest"); return "Wedding " + (n.length>1 ? n.slice(0,-1).join(", ")+" & "+n[n.length-1] : n[0]); };
+
+function renderFinal(){
+  const f=$("final"); f.innerHTML="";
+  if(!cur) return;
+  const k=kesTotal();
+  const tot=el("div","total");
+  tot.append(el("div","eyebrow","Tent total"), el("div","big", cur==="EUR" ? fmtE(eurTotal(k),0) : fmtK(k)));
+  if(cur==="EUR") tot.append(el("div","calc",`${fmtK(k)} ÷ ${CFG.kesPerEur} = ${fmtE(k/CFG.kesPerEur)}, plus 1% exchange cost, rounded up`));
+  f.append(tot);
+  const bank=el("div","bank"), dl=el("dl","kv");
+  if(cur==="EUR"){
+    bank.append(el("div","lbl","Bank transfer to Sanne"));
+    kvRow(dl,"Name",CFG.sanne.beneficiary,CFG.sanne.beneficiary);
+    kvRow(dl,"IBAN",CFG.sanne.iban,CFG.sanne.iban.replace(/\s/g,""));
+    kvRow(dl,"BIC",CFG.sanne.bic,CFG.sanne.bic);
+    kvRow(dl,"Bank",CFG.sanne.bank);
+    kvRow(dl,"Amount",fmtE(eurTotal(k),2),eurTotal(k).toFixed(2));
+  } else {
+    bank.append(el("div","lbl","M-Pesa to Max Lovatelli"));
+    kvRow(dl,"Name",CFG.max.fullName);
+    kvRow(dl,"Number",CFG.max.mpesa,CFG.max.mpesa.replace(/\s/g,""));
+    kvRow(dl,"Amount",fmtK(k),String(Math.round(k)));
+  }
+  kvRow(dl,"Reference",reference(),reference());
+  bank.append(dl); f.append(bank);
+}
+
+/* ---------- step: send ---------- */
+function summaryText(){
+  const k=kesTotal(), L=["Soysambu waiver"+(k?" and tent payment":"")+" ("+subId+")", "From: "+party[0].name.trim(), ""];
+  party.forEach((p,i)=>{
+    L.push(p.name.trim() + (p.w?" (wedding party)":""));
+    L.push(`  ${RES[p.r]}, ${ACC[p.a]}${p.a==="safari" ? ", "+shareText(p) : ""}`);
+    L.push(`  Arriving ${arrival(p)}, leaving ${departure(p)}`);
+    if(kidsText(p)) L.push(`  Children: ${kidsText(p)}`);
+    L.push(`  Waiver: ${i>0 && p.sign==="separate" ? "will sign their own form" : "signed"}`);
+    if(p.a==="safari") L.push(`  Tent: ${p.paidElsewhere ? "paid by someone else" : fmtK(priceFor(p).total)}`);
+    const c=changes(p); if(c.length) L.push(`  Changed: ${c.join("; ")}`);
+    L.push("");
+  });
+  if(k){
+    L.push(cur==="EUR" ? `Paid: ${fmtE(eurTotal(k),2)} to Sanne (${fmtK(k)} + 1% exchange)` : `Paid: ${fmtK(k)} to Max Lovatelli by M-Pesa`);
+    L.push(`Reference: ${reference()}`);
+  }
+  const note=$("note").value.trim(); if(note){ L.push(""); L.push("Note: "+note); }
+  return L.join("\n");
+}
+function payload(){
+  const k=kesTotal();
+  return {
+    id: subId, ref: reference(), payer: party[0].name.trim(), note: $("note").value.trim(), text: summaryText(),
+    kes: k, cur: k ? cur : "", amount: k ? amountText() : "", to: k ? payeeName() : "",
+    people: party.map((p,i)=>({
+      name: p.name.trim(), w: p.w, residency: RES[p.r], idno: p.idno.trim(), arrival: arrival(p), departure: departure(p),
+      children: kidsText(p), tent: ACC[p.a], share: shareText(p), n30: p.n30, n1: p.n1,
+      kes: priceFor(p).total, paidElsewhere: p.paidElsewhere, changes: changes(p).join("; "),
+      signed: !(i>0 && p.sign==="separate"), sig: (i>0 && p.sign==="separate") ? "" : p.sig
+    }))
+  };
+}
+
+function renderConfirm(){
+  const c=$("confirm"); c.innerHTML="";
+  const k=kesTotal();
+  c.append(el("h3",null, k ? "Once you have paid" : "Almost done"));
+  if(k){
+    c.append(el("p","hint","Please only send this after the money has gone through, so we can match your payment to your name."));
+    const lab=el("label","check"), cb=el("input"); cb.type="checkbox"; cb.id="paid"; cb.checked=paid;
+    cb.onchange=()=>{ paid=cb.checked; renderConfirm(); };
+    lab.append(cb, el("span",null, `I have paid ${amountText()} to ${payeeName()}`));
+    c.append(lab);
+  }
+  const ready=(!k || paid) && !sending;
+  const b=el("button","btn primary", sending ? "Sending…" : (k ? "Send my waiver and payment" : "Send my waiver"));
+  b.type="button"; b.setAttribute("aria-disabled", String(!ready)); b.onclick=submit;
+  const row=el("div","row"); row.append(b); c.append(row);
+  c.append(el("p","hint","Your signed waiver goes straight to Sanne and Max. Nothing to print or email."));
+  const st=el("div","status"); st.id="status"; st.hidden=true; c.append(st);
+}
+
+async function submit(){
+  const st=$("status");
+  if(!CFG.sheetUrl){ st.hidden=false; st.className="status err"; st.textContent="This form is not connected yet. Please try again later or contact Sanne."; return; }
+  sending=true; renderConfirm();
+  try{
+    await fetch(CFG.sheetUrl, {method:"POST", mode:"no-cors", headers:{"Content-Type":"text/plain;charset=utf-8"}, body: JSON.stringify(payload())});
+    $("app").hidden=true; $("bar").hidden=true; $("thanks").hidden=false;
+    const k=kesTotal();
+    $("thanks-h").textContent="Thank you, "+first(party[0].name);
+    $("thanks-p").textContent = (party.length>1 ? "Your waivers are" : "Your waiver is") + " with us" + (k ? ", along with your tent payment of "+amountText()+". We will check it has arrived and let you know if anything is missing." : ".") + " We look forward to seeing you at Soysambu.";
+    window.scrollTo(0,0);
+  } catch(e){
+    sending=false; renderConfirm();
+    const s=$("status"); s.hidden=false; s.className="status err";
+    s.textContent="That did not go through. Check your internet connection and press the button again. If it keeps failing, email "+CFG.email+".";
+  }
+}
+
+/* ---------- state ---------- */
+function setStep(id,on){ $(id).setAttribute("aria-disabled", on?"false":"true"); }
+function numberSteps(){
+  let n=0; document.querySelectorAll("section.step").forEach(s=>{ if(!s.hidden) s.querySelector(".step-n").textContent=++n; });
+}
+function updateLight(){
+  document.querySelectorAll("[data-signer]").forEach(n=>{ const p=party[+n.dataset.signer]; if(p) n.textContent=p.name.trim()||"Guest "+(+n.dataset.signer+1); });
+  const has=party.length>0;
+  const detailsOk=has && party.every(detailsDone);
+  const signOk=detailsOk && party.every(signDone);
+  const tentsOk=signOk && party.every(tentDone);
+  const k=kesTotal();
+  $("s-tents").hidden = !(has && tentStepNeeded());
+  $("pay-wrap").hidden = !(tentsOk && k>0);
+  numberSteps();
+  setStep("s-waiver", detailsOk);
+  setStep("s-tents", signOk);
+  setStep("s-send", tentsOk && (!k || !!cur));
+  $("pay-kes").setAttribute("aria-pressed", String(cur==="KES"));
+  $("pay-eur").setAttribute("aria-pressed", String(cur==="EUR"));
+  if(k) renderFinal();
+  if(tentsOk && (!k || cur)) renderConfirm(); else $("confirm").innerHTML="";
+  updateBar(detailsOk, signOk, tentsOk);
+}
+let signerKey="";
+function update(){
+  const has=party.length>0;
+  setStep("s-group",has); setStep("s-details",has);
+  renderGroup(); renderPeople(); renderTents();
+  const key=party.map(p=>p.id+":"+p.name).join("|");
+  if(key!==signerKey){ signerKey=key; renderSigners(); }
+  updateLight();
+}
+function updateBar(detailsOk, signOk, tentsOk){
+  const has=party.length>0; $("bar").hidden=!has; if(!has) return;
+  const k=kesTotal();
+  $("bar-l").textContent = k ? "Tent payment" : "So far";
+  $("bar-t").textContent = k ? (cur==="EUR" ? fmtE(eurTotal(k),0) : fmtK(k)) : "Nothing to pay";
+  const missing=party.filter(p=>!detailsDone(p)).length;
+  $("bar-r").textContent = missing ? `${missing} ${missing===1?"person":"people"} still to check` : (!signOk ? "Waiver still to sign" : (!tentsOk ? "Check the tents" : (k && !cur ? "Choose how to pay" : "Ready to send")));
+}
+
+/* ---------- init ---------- */
+const startWith=(id,typed)=>{
+  party=[makePerson(id,typed)]; paid=false; signerKey=""; update();
+  $("s-group").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth", block:"start"});
+};
+wireSearch($("q"), $("res"), startWith, ()=>[], "I'm not on the list, fill in my details myself");
+wireSearch($("q2"), $("res2"), (id,typed)=>{ party.push(makePerson(id,typed)); paid=false; update(); }, ()=>party.map(p=>p.id), "Add someone who is not on the list");
+$("pay-kes").onclick=()=>{ cur="KES"; paid=false; updateLight(); };
+$("pay-eur").onclick=()=>{ cur="EUR"; paid=false; updateLight(); };
+update();
+</script>
+
+</body>
+</html>
