@@ -151,24 +151,8 @@ details.conf-only summary{cursor:pointer;padding:12px 14px;font-weight:600;color
     <h1>Waiver &amp; tents</h1>
     <div class="ornament" aria-hidden="true"><span></span></div>
     <p class="lede">Everyone staying at Soysambu needs to sign the conservancy's waiver, and this form lets you do it online. If you have a safari tent, you can pay for it at the end. You can fill it in for yourself and everyone coming with you, all in one go.</p>
+    <p class="lede"><b>Please treat this as your final answer on how long you are staying.</b> We use it to confirm the camp, the tents and any payments, so tell us the nights you are actually planning to stay, especially 30 December and 1 January.</p>
   </header>
-
-  <details class="conf-only" id="conf-only">
-    <summary>Already sent your waiver? Download your booking confirmation</summary>
-    <div class="conf-box">
-      <p class="hint">For your Kenya ETA application. Find your name, add your passport number and download.</p>
-      <div class="find" style="padding:0">
-        <label class="lbl" for="cq">Your name</label>
-        <input type="text" id="cq" autocomplete="off" placeholder="Start typing your first or last name">
-        <ul class="results" id="cres" hidden></ul>
-      </div>
-      <div class="field">
-        <label class="lbl" for="cpass">Passport number</label>
-        <input type="text" id="cpass" class="short" autocomplete="off">
-      </div>
-      <div class="row"><button type="button" class="btn primary" id="cdl" aria-disabled="true">Download booking confirmation</button></div>
-    </div>
-  </details>
 
   <div class="find">
     <label class="lbl" for="q">Your name, as you wrote it when you RSVP'd</label>
@@ -190,7 +174,7 @@ details.conf-only summary{cursor:pointer;padding:12px 14px;font-weight:600;color
 
   <section class="step" id="s-details" aria-disabled="true">
     <div class="step-h"><span class="step-n"></span><h2>Details for the waiver</h2></div>
-    <p class="hint">We have filled in what you told us when you RSVP'd. Please check it and confirm your dates and children, even if nothing has changed.</p>
+    <p class="hint">We have filled in what you told us when you RSVP'd. Change anything that is wrong or has changed, and answer anything that is still open.</p>
     <div id="people" style="display:grid;gap:12px"></div>
   </section>
 
@@ -224,7 +208,7 @@ details.conf-only summary{cursor:pointer;padding:12px 14px;font-weight:600;color
         </button>
         <button type="button" class="pay" id="pay-eur" aria-pressed="false">
           <span class="cur">Euros</span>
-          <span class="who">Bank transfer to Sanne, plus 1% to cover the exchange to shillings</span>
+          <span class="who">Bank transfer to Sanne</span>
         </button>
       </div>
       <div id="final" style="display:grid;gap:12px"></div>
@@ -239,6 +223,23 @@ details.conf-only summary{cursor:pointer;padding:12px 14px;font-weight:600;color
     </div>
     <div class="confirm" id="confirm"></div>
   </section>
+
+  <details class="conf-only" id="conf-only">
+    <summary>International guests: download your booking confirmation for the Kenya ETA</summary>
+    <div class="conf-box">
+      <p class="hint">Once you have sent your waiver, you can come back here at any time. Find your name, add your passport number and download.</p>
+      <div class="find" style="padding:0">
+        <label class="lbl" for="cq">Your name</label>
+        <input type="text" id="cq" autocomplete="off" placeholder="Start typing your first or last name">
+        <ul class="results" id="cres" hidden></ul>
+      </div>
+      <div class="field">
+        <label class="lbl" for="cpass">Passport number</label>
+        <input type="text" id="cpass" class="short" autocomplete="off">
+      </div>
+      <div class="row"><button type="button" class="btn primary" id="cdl" aria-disabled="true">Download booking confirmation</button></div>
+    </div>
+  </details>
 
   <footer>
     <div class="ornament" aria-hidden="true"><span></span></div>
@@ -303,7 +304,8 @@ function makePerson(id, typed){
   if(id===null) return Object.assign(base, {id:null, name:typed||"", w:false, r:null, a:null, share:null});
   const g=G[id];
   const share = g.a==="safari" ? (g.m>=0 ? "mate" : g.m===-2 ? "other" : "solo") : null;
-  return Object.assign(base, {id, name:g.n, w:!!g.w, r:g.r||null, a:g.a, share, kids: g.kn||""});
+  const kidsAns = g.kc>0 || g.kn ? "yes" : (g.kc===0 ? "no" : null);
+  return Object.assign(base, {id, name:g.n, w:!!g.w, r:g.r||null, a:g.a, share, kids: g.kn||"", kidsAns, n1: g.j===undefined ? null : !!g.j});
 }
 const mateName = p => p.id!==null && G[p.id].m>=0 ? G[G[p.id].m].n : null;
 const nightWas = p => p.id===null || G[p.id].j===undefined ? null : (G[p.id].j ? "yes" : "no");
@@ -387,7 +389,6 @@ function seg(options, value, onSet){
 function field(label, was, need, child){
   const f=el("div","field"+(need?" need":""));
   const h=el("div","field-h"); h.append(el("span","lbl",label));
-  if(was){ const w=el("span","was"); w.append("Your RSVP: "); w.append(el("b",null,was)); h.append(w); }
   f.append(h, child);
   if(need) f.append(el("span","need-note","Please choose one"));
   return f;
@@ -445,10 +446,7 @@ function renderPeople(){
     [["n30","Night of 30 December"],["n1","Night of 1 January"]].forEach(([key,label],k)=>{
       const row=el("div","night-row"+(k===0?" first":"")+(p[key]===null?" need":""));
       const h=el("div","field-h"); h.append(el("span","night-day",label));
-      const w=el("span","was"); w.append("Your RSVP: ");
-      const was=nightWas(p);
-      w.append(el("b",null, key==="n30" ? "not asked" : (was ? YN[was].toLowerCase() : "no answer")));
-      h.append(w); row.append(h);
+      row.append(h);
       row.append(seg(YN, p[key]===null ? null : (p[key]?"yes":"no"), v=>{ p[key]= v==="yes"; paid=false; update(); }));
       nights.append(row);
     });
@@ -458,8 +456,7 @@ function renderPeople(){
     }
     card.append(nights);
 
-    const kw=kidsWas(p);
-    const kf=field("Children under 18 coming with you", kw || (g ? "no answer" : null), !p.kidsAns,
+    const kf=field("Children under 18 coming with you", null, !p.kidsAns,
       seg({no:"No children", yes:"Yes, bringing children"}, p.kidsAns, v=>{ p.kidsAns=v; update(); }));
     if(p.kidsAns==="yes"){
       const inp=textInput("kids-"+i, p.kids, "Names and ages, for example Aaron 12, Sophie 10", v=>p.kids=v);
@@ -581,7 +578,7 @@ function renderFinal(){
   const k=kesTotal();
   const tot=el("div","total");
   tot.append(el("div","eyebrow","Tent total"), el("div","big", cur==="EUR" ? fmtE(eurTotal(k),0) : fmtK(k)));
-  if(cur==="EUR") tot.append(el("div","calc",`${fmtK(k)} ÷ ${CFG.kesPerEur} = ${fmtE(k/CFG.kesPerEur)}, plus 1% exchange cost, rounded up`));
+  if(cur==="EUR") tot.append(el("div","calc",`${fmtK(k)} ÷ ${CFG.kesPerEur} = ${fmtE(k/CFG.kesPerEur)}, plus 1% exchange cost`));
   f.append(tot);
   const bank=el("div","bank"), dl=el("dl","kv");
   if(cur==="EUR"){
@@ -763,8 +760,8 @@ function update(){
   updateLight();
 }
 function updateBar(detailsOk, signOk, tentsOk){
-  const has=party.length>0; $("bar").hidden=!has; if(!has) return;
   const k=kesTotal();
+  $("bar").hidden = !(party.length>0 && k>0); if($("bar").hidden) return;
   $("bar-l").textContent = k ? "Tent payment" : "So far";
   $("bar-t").textContent = k ? (cur==="EUR" ? fmtE(eurTotal(k),0) : fmtK(k)) : "Nothing to pay";
   const missing=party.filter(p=>!detailsDone(p)).length;
